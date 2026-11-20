@@ -2,19 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import InputField from './InputField'
 import { traceLegacy } from './legacyTrace'
-
-type Field = 'name' | 'email'
-type Values = Record<Field, string>
-
-const initialValues: Values = { name: '', email: '' }
-
-function validate(values: Values): Values {
-  const email = values.email.trim()
-  return {
-    name: values.name.trim() ? '' : 'Nhập tên.',
-    email: !email ? 'Nhập email.' : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? '' : 'Email không đúng định dạng.',
-  }
-}
+import { initialValues, validate, type Field } from './validation'
 
 export default function SimpleForm() {
   traceLegacy('render', 'SimpleForm')
@@ -64,7 +52,7 @@ export default function SimpleForm() {
   }
 
   return (
-    <form className="legacy-form" onSubmit={handleSubmit} noValidate>
+    <form className="validation-form" onSubmit={handleSubmit} noValidate>
       <h2>Legacy</h2>
       <InputField
         name="name"

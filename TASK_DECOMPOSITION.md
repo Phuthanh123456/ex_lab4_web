@@ -62,3 +62,14 @@ Thư mục `ex1.3_lab4_web` đang trống. Đây là WBS dự kiến theo sáu m
 Tổng cộng 22 lượt gọi render (8 của `SimpleForm`, 8 của ô Tên, 6 của ô Email), 5 lượt chạy effect và 4 commit pha `update`. Effect đồng bộ lỗi xuống con và effect cuộn không chạy trong kịch bản này. Trace dùng console và callback của Profiler, không thêm React state phục vụ ghi log. Chưa đo trong Chrome.
 
 Đã kiểm tra thêm hai tình huống trong cùng môi trường. Nhập nhanh 5 ký tự ghi nhận 46 lượt gọi render, 22 lượt chạy effect và 8 commit. Submit email sai ghi nhận 12 lượt gọi render, 4 lượt chạy effect và 2 commit, với một lời gọi cuộn đến ô Email. Validation đồng bộ chưa tái hiện race condition hay vòng lặp cập nhật. Xem `ex1.3_lab4_web/README.md` để biết luồng effect và phân tích rủi ro.
+
+### Kết quả kiểm tra cuối Ex1.3
+
+| Hạng mục | Kết quả |
+| --- | --- |
+| Form cải tiến và demo | Đã triển khai công tắc Legacy/Refactored, quy tắc validation dùng chung và bảng so sánh. |
+| So sánh Profiler | Nhập `A` sau khi từng form mount ổn định cho 4 commit ở Legacy và 1 ở Refactored. Đo trong React 19.3.1 development, StrictMode và jsdom. Chưa đo commit production. |
+| Type check, build và preview | Type check và production build đạt. Vite preview trả HTTP 200 cho HTML và JavaScript. |
+| Kiểm tra form trên production bundle | Cả hai bản đạt kiểm thử jsdom cho submit trống, email sai, sửa dữ liệu, nhập nhanh và submit hợp lệ. Khi submit sai, focus và lời gọi cuộn đến đúng trường lỗi đầu tiên. |
+| Label, bàn phím và bố cục | Xác minh liên kết label–input, thứ tự focus trong DOM và focus sau submit sai. Chưa thử Tab, chuyển động cuộn hoặc bố cục desktop và 375 px trực tiếp trong Chrome. |
+| Ảnh minh chứng | Chưa lưu được ảnh hai form hoặc Profiler vì công cụ điều khiển Chrome không kết nối được. |

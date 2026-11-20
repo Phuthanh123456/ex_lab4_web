@@ -5,6 +5,7 @@ export function traceLegacy(kind: 'render' | 'effect', label: string) {
 }
 
 export const traceLegacyCommit: ProfilerOnRenderCallback = (id, phase) => {
-  console.count('[Legacy Profiler] commits')
-  console.log(`[Legacy commit] ${id}: ${phase}`)
+  const label = id === 'SimpleForm' ? 'Legacy' : 'Refactored'
+  console.count(`[${label} Profiler] commits`)
+  console.log(`[${label} commit] ${id}: ${phase}`)
 }

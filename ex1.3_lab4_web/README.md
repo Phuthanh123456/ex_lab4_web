@@ -27,3 +27,18 @@ React 19.3.1 development, bật `StrictMode`, nạp module qua Vite và phát s�
 - **Vòng lặp cha–con:** Ví dụ cha tạo callback mới mỗi render, còn effect của con phụ thuộc vào callback đó và gọi nó để cập nhật cha bằng một object mới. Cập nhật cha tạo callback mới, kích hoạt lại effect con và có thể dẫn đến `Maximum update depth exceeded`. Không quan sát thấy vòng lặp này trong ba kịch bản đã đo.
 
 Type check và production build: `npm.cmd run build`. Kiểm tra cuộn ở đây xác minh lời gọi DOM trong jsdom.
+
+## Đối chiếu với Refactored
+
+Dùng cùng một Profiler trong cùng phiên React 19.3.1 development, StrictMode và jsdom. Chọn từng bản, đợi mount ổn định và đặt lại bộ đếm tương ứng (`[Legacy Profiler] commits` hoặc `[Refactored Profiler] commits`). Nhập đúng một ký tự `A` vào ô Tên trống khi cả hai trường còn trống và form chưa submit. Legacy ghi **4 commit**, Refactored ghi **1 commit** trong lượt đo này.
+
+Refactored giữ giá trị ở cha, truyền giá trị và lỗi xuống qua props, đồng thời tính lỗi và validity bằng hàm thuần. Luồng này bỏ các effect đồng bộ giá trị lên cha, validate sau commit, tính validity sau commit và sao chép lỗi xuống con. Focus và cuộn chạy trong handler submit sai. Trong lượt gõ kể trên, Legacy chạy ba bước đầu, còn bước sao chép lỗi và cuộn chưa được kích hoạt.
+
+## Kiểm tra cuối
+
+- Type check và production build đạt. Vite preview trả HTTP 200 cho HTML và JavaScript.
+- Kiểm thử production bundle trong jsdom đạt cho cả hai bản: submit trống, email sai định dạng, sửa dữ liệu, nhập nhanh và submit hợp lệ. Khi submit sai, form focus và gọi cuộn đến trường lỗi đầu tiên. Nhập và sửa không gọi cuộn.
+- Hai label liên kết đúng với input. Đã kiểm tra thứ tự phần tử có thể nhận focus trong DOM và gọi focus lần lượt. Chưa thử phím Tab, chuyển động cuộn hoặc bố cục desktop và 375 px trong Chrome.
+- Số commit ở bảng so sánh được đo bằng Profiler trong development. Production được kiểm thử hành vi riêng và chưa đo commit. Chưa có ảnh minh chứng vì công cụ điều khiển Chrome không kết nối được.
+
+Chạy demo bằng `npm.cmd run dev`. Để xem bản production, chạy `npm.cmd run build` rồi `npm.cmd run preview`.

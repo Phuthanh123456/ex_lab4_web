@@ -23,6 +23,8 @@ h1 {
   line-height: 1.15;
 }
 
+.intro, .comparison p { color: #36534a; }
+
 :focus-visible {
   outline: 3px solid #0a5846;
   outline-offset: 4px;
@@ -44,17 +46,34 @@ h1 {
   overflow: hidden;
 }
 
-.legacy-form {
+.form-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 1.5rem;
+}
+
+.form-switch button[aria-pressed="true"] {
+  color: #fff;
+  background: #0a5846;
+}
+
+.form-switch button {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.validation-form {
   display: grid;
   gap: 1rem;
   max-width: 28rem;
   margin-top: 2rem;
 }
 
-.legacy-form h2, .legacy-form p { margin: 0; }
-.legacy-field { display: grid; gap: .375rem; }
-.legacy-field label { font-weight: 650; }
-.legacy-form input, .legacy-form button {
+.validation-form h2, .validation-form p { margin: 0; }
+.validation-field { display: grid; gap: .375rem; }
+.validation-field label { font-weight: 650; }
+.validation-form input, .validation-form button, .form-switch button {
   box-sizing: border-box;
   min-width: 0;
   min-height: 44px;
@@ -63,6 +82,35 @@ h1 {
   border-radius: .375rem;
   font: inherit;
 }
-.legacy-form button { justify-self: start; color: #fff; background: #0a5846; }
-.legacy-form input[aria-invalid="true"] { border-color: #9a2929; }
+.form-switch button { color: #0a5846; background: #fff; }
+.validation-form button { justify-self: start; color: #fff; background: #0a5846; }
+.validation-form input[aria-invalid="true"] { border-color: #9a2929; }
 .field-error { color: #9a2929; }
+
+.comparison {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #cedbd2;
+}
+
+.comparison h2 { margin: 0; }
+
+.comparison table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.comparison th, .comparison td {
+  padding: .625rem .5rem;
+  border-bottom: 1px solid #cedbd2;
+  vertical-align: top;
+}
+
+.comparison thead { background: #edf3ef; }
+
+@media (max-width: 400px) {
+  .container { padding: 1rem; }
+  .comparison th, .comparison td { padding-inline: .25rem; }
+}

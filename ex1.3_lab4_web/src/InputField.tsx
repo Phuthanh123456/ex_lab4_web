@@ -1,8 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 import { traceLegacy } from './legacyTrace'
-
-type Field = 'name' | 'email'
+import type { Field, Values } from './validation'
 
 export default function InputField({
   name,
@@ -18,7 +17,7 @@ export default function InputField({
   type: 'text' | 'email'
   error: string
   scrollAttempt: number
-  setValues: Dispatch<SetStateAction<Record<Field, string>>>
+  setValues: Dispatch<SetStateAction<Values>>
   clearFeedback: (value: string) => void
 }) {
   traceLegacy('render', `InputField(${name})`)
@@ -52,7 +51,7 @@ export default function InputField({
   }, [error, name, scrollAttempt, visibleError])
 
   return (
-    <div className="legacy-field">
+    <div className="validation-field">
       <label htmlFor={id}>{label}</label>
       <input
         ref={input}
