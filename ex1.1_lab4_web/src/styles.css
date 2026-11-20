@@ -1,0 +1,88 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #18312c;
+  background: #edf3ef;
+  line-height: 1.55;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: #0a5846; }
+:focus-visible { outline: 3px solid #916000; outline-offset: 4px; }
+
+.container { width: min(100% - 2rem, 64rem); margin-inline: auto; }
+.site-header { background: #fff; border-bottom: 1px solid #cedbd2; }
+.header-content, nav { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
+.header-content { justify-content: space-between; padding-block: .75rem; }
+.brand { font-weight: 700; }
+nav a, .action {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: .85rem;
+  border-radius: .45rem;
+  font-weight: 650;
+}
+nav a[aria-current="page"] { background: #d8ebe1; }
+.action { background: #0a5846; color: #fff; margin-top: .75rem; }
+
+main { padding-block: clamp(2rem, 7vw, 5rem); }
+.panel {
+  min-height: 16rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
+  background: #fff;
+  border: 1px solid #cedbd2;
+  border-radius: 1rem;
+}
+h1 { margin: 0; line-height: 1.15; font-size: clamp(2rem, 5vw, 3.25rem); }
+p { max-width: 55ch; margin-block: 1rem 0; }
+
+.skip-link { position: absolute; top: .5rem; left: .5rem; padding: .75rem; background: #fff; }
+.skip-link:not(:focus) { clip-path: inset(50%); position: absolute; width: 1px; height: 1px; overflow: hidden; }
+
+.people-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 1rem;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  list-style: none;
+}
+
+.people-list li {
+  padding: 1rem;
+  border: 1px solid #cedbd2;
+  border-radius: .75rem;
+}
+
+.people-list h2 { margin: 0; font-size: 1.2rem; }
+.people-list p { margin-top: .25rem; }
+
+.person-detail { overflow-wrap: anywhere; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.person-skeleton h1 span,
+.person-skeleton p span,
+.person-skeleton .action {
+  color: transparent;
+  background: #dce9e1;
+  border-radius: .35rem;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+@media (forced-colors: active) {
+  .person-skeleton h1 span,
+  .person-skeleton p span,
+  .person-skeleton .action {
+    forced-color-adjust: none;
+    background: GrayText;
+  }
+}
