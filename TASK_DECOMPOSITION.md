@@ -34,3 +34,31 @@ Phân công dự kiến: Ex1.2 chuẩn bị app, Ex1.2.1 phụ trách router, la
 | 5. Responsive và kiểm tra | Ex1.2.1, Ex1.2.2 | Kiểm tra bố cục desktop/mobile, bàn phím, điều hướng, type check, production build và Vite preview. | Nội dung và điều hướng dùng được ở cả hai kích thước. Type check, build và các luồng chính trên preview đạt. |
 
 Trạng thái Ex1.2.1: đã khởi tạo app, triển khai Home (`/`) và About (`/about`) trong layout dùng chung. Navigation dùng `NavLink` với kiểu hiển thị riêng cho link hiện tại và khi focus bằng bàn phím. Các tuyến People và kiểm tra responsive thuộc các bước tiếp theo.
+
+## Lab 4 Exercise 1.3 — Legacy Validation Anti-Patterns
+
+Thư mục `ex1.3_lab4_web` đang trống. Đây là WBS dự kiến theo sáu mốc được giao. Trường nhập, quy tắc validation và anti-pattern cụ thể sẽ được đối chiếu với ảnh đề trước khi triển khai.
+
+| Mốc | Công việc | Tiêu chí hoàn thành |
+| --- | --- | --- |
+| 1. Setup | Đối chiếu ảnh đề và chuẩn bị app Vite, React 19 và TypeScript trực tiếp trong `ex1.3_lab4_web` theo quy ước dự án. | Xác định trường nhập, quy tắc validation, anti-pattern cần tái hiện và lệnh chạy demo. |
+| 2. Form legacy | Dựng form và tái hiện đúng luồng validation legacy theo đề. Chuẩn bị dữ liệu hợp lệ và không hợp lệ để chạy lại. | Có thể tái hiện kết quả validation ở từng kịch bản đã định. |
+| 3. Trace render | Ghi trình tự thao tác, render và lần chạy validation khi nhập, đổi focus và submit theo các kịch bản áp dụng. Phân biệt render với commit khi đọc trace. | Có trace lặp lại được và chỉ rõ thao tác nào dẫn đến render hoặc validation bổ sung. |
+| 4. Kiểm tra rủi ro | Dùng trace để kiểm tra lỗi hiển thị sai thời điểm, trạng thái lỗi cũ và render lặp nếu xuất hiện. | Mỗi phát hiện có bước tái hiện, kết quả quan sát và ảnh hưởng. Ghi rõ các trường hợp chưa xác minh. |
+| 5. Form cải tiến | Dựng bản cải tiến theo đề với cùng trường nhập và quy tắc validation. Kiểm tra cả dữ liệu đúng, dữ liệu sai và việc sửa lỗi. | Các kịch bản của form legacy chạy lại được trên bản cải tiến để đối chiếu. |
+| 6. So sánh và demo | Chạy hai form với cùng dữ liệu và trình tự thao tác. Đối chiếu thông báo lỗi, hành vi submit và trace render. Chạy type check, production build và preview. | Có bảng so sánh dựa trên kết quả thực tế, lệnh chạy demo và ghi chú cho các mục chưa kiểm tra. |
+
+### Trace Legacy khi gõ một ký tự
+
+Đo trên React 19.3.1 ở chế độ development, bật `StrictMode`, dùng Vite để nạp module và jsdom để phát sự kiện `input`. Đợi mount và các effect ban đầu ổn định, xóa log của lượt mount, đặt lại bộ đếm Profiler, rồi nhập `A` vào ô Tên còn trống khi form chưa được submit.
+
+| Commit của Profiler | Lượt gọi render trước commit | Effect sau commit |
+| --- | --- | --- |
+| 1 | 4 | Đồng bộ Tên lên cha. |
+| 2 | 6 | Validate các trường, sau đó kiểm tra submit đang chờ và thoát. |
+| 3 | 6 | Tính form validity. |
+| 4 | 6 | Kiểm tra submit đang chờ và thoát. |
+
+Tổng cộng 22 lượt gọi render (8 của `SimpleForm`, 8 của ô Tên, 6 của ô Email), 5 lượt chạy effect và 4 commit pha `update`. Effect đồng bộ lỗi xuống con và effect cuộn không chạy trong kịch bản này. Trace dùng console và callback của Profiler, không thêm React state phục vụ ghi log. Chưa đo trong Chrome.
+
+Đã kiểm tra thêm hai tình huống trong cùng môi trường. Nhập nhanh 5 ký tự ghi nhận 46 lượt gọi render, 22 lượt chạy effect và 8 commit. Submit email sai ghi nhận 12 lượt gọi render, 4 lượt chạy effect và 2 commit, với một lời gọi cuộn đến ô Email. Validation đồng bộ chưa tái hiện race condition hay vòng lặp cập nhật. Xem `ex1.3_lab4_web/README.md` để biết luồng effect và phân tích rủi ro.

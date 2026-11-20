@@ -1,0 +1,68 @@
+:root {
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  color: #182e29;
+  background: #edf3ef;
+}
+
+body { margin: 0; }
+
+.container {
+  box-sizing: border-box;
+  width: min(100% - 2rem, 48rem);
+  margin: clamp(2rem, 8vw, 6rem) auto;
+  padding: clamp(1.25rem, 5vw, 3rem);
+  border: 1px solid #cedbd2;
+  border-radius: 1rem;
+  background: #fff;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  line-height: 1.15;
+}
+
+:focus-visible {
+  outline: 3px solid #0a5846;
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  top: .5rem;
+  left: .5rem;
+  padding: .5rem .75rem;
+  color: #0a5846;
+  background: #fff;
+}
+
+.skip-link:not(:focus) {
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.legacy-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 28rem;
+  margin-top: 2rem;
+}
+
+.legacy-form h2, .legacy-form p { margin: 0; }
+.legacy-field { display: grid; gap: .375rem; }
+.legacy-field label { font-weight: 650; }
+.legacy-form input, .legacy-form button {
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 44px;
+  padding: .5rem .75rem;
+  border: 1px solid #61776c;
+  border-radius: .375rem;
+  font: inherit;
+}
+.legacy-form button { justify-self: start; color: #fff; background: #0a5846; }
+.legacy-form input[aria-invalid="true"] { border-color: #9a2929; }
+.field-error { color: #9a2929; }
