@@ -14,6 +14,7 @@ export default function Layout() {
           <ul>
             <li><NavLink to="/" end className={navLinkClassName}>Trang chủ</NavLink></li>
             <li><NavLink to="/about" className={navLinkClassName}>Giới thiệu</NavLink></li>
+            <li><NavLink to="/people" className={navLinkClassName}>People</NavLink></li>
           </ul>
         </nav>
       </header>

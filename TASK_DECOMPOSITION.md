@@ -33,7 +33,18 @@ Phân công dự kiến: Ex1.2 chuẩn bị app, Ex1.2.1 phụ trách router, la
 | 4. People master–detail | Ex1.2.2 | Tạo danh sách và chi tiết dùng chung dữ liệu. Liên kết từng hồ sơ theo ID, có đường quay về danh sách và thông báo cho ID sai. | Mở hồ sơ từ danh sách và deep link, quay lại danh sách, xử lý đúng ID sai. |
 | 5. Responsive và kiểm tra | Ex1.2.1, Ex1.2.2 | Kiểm tra bố cục desktop/mobile, bàn phím, điều hướng, type check, production build và Vite preview. | Nội dung và điều hướng dùng được ở cả hai kích thước. Type check, build và các luồng chính trên preview đạt. |
 
-Trạng thái Ex1.2.1: đã khởi tạo app, triển khai Home (`/`) và About (`/about`) trong layout dùng chung. Navigation dùng `NavLink` với kiểu hiển thị riêng cho link hiện tại và khi focus bằng bàn phím. Các tuyến People và kiểm tra responsive thuộc các bước tiếp theo.
+Trạng thái Ex1.2: đã triển khai Home, About, People master–detail và xử lý URL không khớp trong layout dùng chung.
+
+### Kết quả kiểm tra Ex1.2.2
+
+| Hạng mục | Kết quả |
+| --- | --- |
+| Type check và production build | Đạt với `npm.cmd run build`. |
+| Vite preview và mở URL trực tiếp | HTTP 200 cho `/`, `/about`, `/people`, `/people/minh-anh`, `/people/id-sai` và `/url-sai`. Vite trả HTML của SPA cho các URL này. |
+| Nội dung tuyến và link active | Kiểm tra render bằng React Router đạt cho Home, About, lời nhắc chọn người, chi tiết đúng ID, ID sai và URL sai. People vẫn active trên các tuyến chi tiết. |
+| Back/Forward | Đạt với lịch sử của React Router trong bộ nhớ khi chuyển giữa hai hồ sơ. Chưa thử nút Back/Forward trong Chrome. |
+| Responsive | CSS production có grid hai cột trên desktop, một cột từ 640px trở xuống. Thứ tự trong HTML là danh sách trước, chi tiết sau. Chưa kiểm tra cuộn ngang hoặc thao tác bàn phím trực tiếp trong trình duyệt. |
+| Ảnh minh chứng | Chưa có. Công cụ điều khiển trình duyệt không kết nối được với Chrome. |
 
 ## Lab 4 Exercise 1.3 — Legacy Validation Anti-Patterns
 
