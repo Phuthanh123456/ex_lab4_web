@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from 'react-router'
 import './layout.css'
 
-function navLinkClassName({ isActive }: { isActive: boolean }) {
+function navLinkClassName({ isActive }) {
   return isActive ? 'nav-link nav-link-active' : 'nav-link'
 }
 

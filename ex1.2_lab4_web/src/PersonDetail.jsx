@@ -3,7 +3,7 @@ import NotFoundState from './NotFoundState'
 import { people } from './people'
 
 export default function PersonDetail() {
-  const { id } = useParams<'id'>()
+  const { id } = useParams()
   const person = people.find((entry) => entry.id === id)
 
   if (!person) {

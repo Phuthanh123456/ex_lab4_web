@@ -8,7 +8,7 @@
 
 ## Lab 4 Exercise 1.2
 
-- Dùng thư mục `ex1.2_lab4_web` làm thư mục gốc của app. Dùng lại quy ước Vite, React 19, TypeScript strict và React Router 7 từ Ex1.1.
+- Dùng thư mục `ex1.2_lab4_web` làm thư mục gốc của app. Dùng Vite, React 19, JavaScript/JSX và React Router 7.
 - Dùng layout chung cho các tuyến trong app. Điều hướng phải có trạng thái hiện tại và focus dễ thấy khi dùng bàn phím.
 - People master–detail dùng chung dữ liệu và ID ổn định. URL chi tiết phải mở trực tiếp được và có thông báo khi ID không tồn tại.
-- Kiểm tra responsive trên desktop và mobile, điều hướng bằng bàn phím, type check và production build trước khi bàn giao.
+- Kiểm tra responsive trên desktop và mobile, điều hướng bằng bàn phím và production build trước khi bàn giao.
